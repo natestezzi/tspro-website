@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>T.S. Pro — AI Websites for Small Businesses</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#0e0e0e;color:#e8e6e0;font-family:'Mulish',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+:root{
+  --bg:#0e0e0e;--bg2:#161616;--bg3:#1e1e1e;
+  --rule:#2a2a2a;--rule2:#333;--text:#e8e6e0;
+  --muted:#777;--dim:#444;--white:#ffffff;
+  --gold:#c9a84c;--gold-dim:rgba(201,168,76,0.12);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Mulish',sans-serif;
+}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:64px;background:rgba(14,14,14,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--rule)}
+.logo{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:.02em}
+.logo em{font-style:italic;color:var(--gold)}
+.nl{display:flex;align-items:center;gap:2px;list-style:none}
+.nl>li{position:relative}
+.nl>li>a,.nl>li>button{display:flex;align-items:center;gap:5px;padding:7px 14px;border-radius:6px;font-family:var(--sans);font-size:.82rem;font-weight:500;color:var(--muted);text-decoration:none;background:none;border:none;cursor:pointer;transition:color .15s,background .15s;letter-spacing:.03em}
+.nl>li>a:hover,.nl>li>button:hover{color:var(--text);background:rgba(255,255,255,.04)}
+.chev{font-size:.5rem;opacity:.5;transition:transform .25s ease}
+.nl>li.open .chev{transform:rotate(180deg)}
+.dd{display:block;visibility:hidden;position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(-8px);min-width:210px;background:var(--bg2);border:1px solid var(--rule2);border-radius:10px;padding:6px;box-shadow:0 20px 60px rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s ease,visibility .22s}
+.nl>li.open .dd{visibility:visible;opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.dd a{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:7px;font-size:.82rem;color:var(--muted);text-decoration:none;transition:background .14s,color .14s}
+.dd a:hover{background:var(--bg3);color:var(--text)}
+.di{font-size:.95rem;width:18px;text-align:center;flex-shrink:0}
+.dd hr{border:none;border-top:1px solid var(--rule);margin:5px 0}
+.nr{display:flex;align-items:center;gap:8px}
+.ng{padding:7px 15px;border-radius:7px;font-size:.82rem;font-weight:500;color:var(--muted);text-decoration:none;transition:color .15s}
+.ng:hover{color:var(--text)}
+.nc{padding:9px 20px;background:var(--gold);color:#000;border-radius:7px;font-size:.82rem;font-weight:700;text-decoration:none;letter-spacing:.02em;transition:opacity .2s}
+.nc:hover{opacity:.82}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.burger span{display:block;width:21px;height:1.5px;background:var(--text);border-radius:2px}
+@media(max-width:840px){
+  .nl,.nr{display:none}.burger{display:flex}
+  .mob{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:var(--bg);z-index:299;padding:24px 6%;flex-direction:column;gap:4px;overflow-y:auto}
+  .mob.open{display:flex}
+  .mob a{display:block;padding:14px 0;border-bottom:1px solid var(--rule);font-size:.97rem;font-weight:500;color:var(--muted);text-decoration:none}
+  .mob a:hover{color:var(--text)}
+  .mob-cta{margin-top:20px;display:block;text-align:center;padding:15px;background:var(--gold);color:#000;border-radius:9px;font-weight:700;text-decoration:none}
+}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:110px 6% 90px;position:relative;overflow:hidden}
+.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 40%,rgba(201,168,76,.06),transparent 70%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,black,transparent);pointer-events:none}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:var(--gold-dim);border:1px solid rgba(201,168,76,.25);border-radius:100px;font-size:.72rem;font-weight:600;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:32px;animation:rise .8s cubic-bezier(.22,1,.36,1) both}
+.hdot{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-family:var(--serif);font-size:clamp(3.2rem,8vw,7rem);font-weight:700;line-height:1.0;letter-spacing:-.01em;color:var(--text);max-width:860px;margin:0 auto 28px;animation:rise .8s .1s cubic-bezier(.22,1,.36,1) both}
+h1 em{font-style:italic;color:var(--gold)}
+h1 .dim{color:var(--muted)}
+.hero-lead{font-size:1.08rem;color:var(--muted);max-width:520px;margin:0 auto 44px;line-height:1.8;font-weight:400;animation:rise .8s .2s cubic-bezier(.22,1,.36,1) both}
+.hbtns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;animation:rise .8s .3s cubic-bezier(.22,1,.36,1) both}
+.btn-gold{padding:14px 30px;background:var(--gold);color:#000;border-radius:8px;font-weight:700;font-size:.9rem;text-decoration:none;letter-spacing:.02em;transition:opacity .2s,transform .2s}
+.btn-gold:hover{opacity:.82;transform:translateY(-1px)}
+.btn-out{padding:14px 30px;background:transparent;color:var(--text);border:1px solid var(--rule2);border-radius:8px;font-size:.9rem;font-weight:500;text-decoration:none;transition:border-color .2s,transform .2s}
+.btn-out:hover{border-color:var(--dim);transform:translateY(-1px)}
+.hero-bar{display:flex;align-items:center;justify-content:center;margin-top:64px;gap:0;background:var(--bg2);border:1px solid var(--rule);border-radius:12px;overflow:hidden;max-width:580px;width:100%;animation:rise .8s .4s cubic-bezier(.22,1,.36,1) both}
+.hstat{flex:1;padding:20px 12px;text-align:center;border-right:1px solid var(--rule)}
+.hstat:last-child{border-right:none}
+.hstat-n{font-family:var(--serif);font-size:1.9rem;font-weight:700;letter-spacing:-.03em;color:var(--text);line-height:1}
+.hstat-n em{font-style:normal;color:var(--gold)}
+.hstat-l{font-size:.68rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+
+/* ── MARQUEE ── */
+.mq{overflow:hidden;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--bg2);padding:12px 0}
+.mq-t{display:flex;gap:40px;align-items:center;animation:ticker 26s linear infinite;width:max-content;white-space:nowrap}
+.mq-i{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:10px}
+.mq-d{width:3px;height:3px;border-radius:50%;background:var(--rule2)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── SECTION BASE ── */
+.sec{padding:100px 6%}
+.eyebrow{display:block;font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.h2{font-family:var(--serif);font-size:clamp(2rem,4.5vw,3.4rem);font-weight:700;letter-spacing:-.01em;line-height:1.1;color:var(--text);margin-bottom:16px}
+.lead{font-size:.95rem;color:var(--muted);line-height:1.8;max-width:460px}
+
+/* ── WHAT WE DO ── */
+#what{background:var(--bg2)}
+.what-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:56px}
+.what-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:16px;overflow:hidden}
+@media(max-width:680px){.what-grid{grid-template-columns:1fr}}
+.wcard{background:var(--bg2);padding:40px 36px;transition:background .2s}
+.wcard:hover{background:var(--bg3)}
+.wico{font-size:1.6rem;margin-bottom:22px;display:block}
+.wcard h3{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:10px;letter-spacing:.01em}
+.wcard p{font-size:.87rem;color:var(--muted);line-height:1.75}
+
+/* ── HOW ── */
+#how{background:var(--bg)}
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+@media(max-width:760px){.how-grid{grid-template-columns:1fr;gap:44px}}
+.steps-list{display:flex;flex-direction:column;gap:0}
+.step-row{display:flex;gap:20px;padding:28px 0;border-bottom:1px solid var(--rule)}
+.step-row:last-child{border-bottom:none}
+.step-num{font-family:var(--serif);font-size:2.2rem;font-weight:700;color:var(--rule2);line-height:1;flex-shrink:0;width:48px;letter-spacing:-.03em}
+.step-body h3{font-family:var(--serif);font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:7px}
+.step-body p{font-size:.86rem;color:var(--muted);line-height:1.7}
+.how-right{background:var(--bg2);border:1px solid var(--rule);border-radius:16px;padding:40px;position:relative;overflow:hidden}
+.how-right::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(201,168,76,.08),transparent 70%);pointer-events:none}
+.how-right h3{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--text);margin-bottom:20px;font-style:italic}
+.promise-list{list-style:none;display:flex;flex-direction:column;gap:13px}
+.promise-list li{display:flex;align-items:flex-start;gap:11px;font-size:.88rem;color:var(--muted);line-height:1.6}
+.pcheck{color:var(--gold);font-size:.9rem;flex-shrink:0;margin-top:2px}
+
+/* ── EXAMPLES ── */
+#examples{background:var(--bg2)}
+.ex-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:48px}
+.cats{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:36px}
+.cat{padding:7px 17px;border-radius:100px;border:1px solid var(--rule2);background:transparent;color:var(--dim);font-family:var(--sans);font-size:.78rem;font-weight:600;cursor:pointer;transition:.18s;letter-spacing:.04em}
+.cat.on,.cat:hover{background:var(--gold);color:#000;border-color:var(--gold)}
+.biz-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.biz-card{border-radius:12px;overflow:hidden;border:1px solid var(--rule);background:var(--bg3);transition:transform .25s,border-color .25s}
+.biz-card:hover{transform:translateY(-4px);border-color:var(--rule2)}
+
+/* SVG preview window */
+.site-preview{width:100%;height:190px;display:block;border-bottom:1px solid var(--rule)}
+
+.binfo{padding:18px 20px 20px}
+.btop{display:flex;align-items:center;gap:9px;margin-bottom:7px}
+.bico{font-size:1.2rem}
+.bname{font-family:var(--serif);font-size:.97rem;font-weight:700;color:var(--text)}
+.btype{font-size:.67rem;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-top:1px}
+.bdesc{font-size:.8rem;color:var(--muted);line-height:1.6}
+.btags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.btag{padding:2px 9px;border-radius:100px;background:rgba(255,255,255,.04);border:1px solid var(--rule);font-size:.67rem;color:var(--dim);font-weight:600}
+
+/* ── PRICING ── */
+#pricing{background:var(--bg)}
+.p-top{text-align:center;max-width:500px;margin:0 auto 60px}
+.p-top .lead{margin:12px auto 0}
+.p-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:960px;margin:0 auto}
+@media(max-width:760px){.p-row{grid-template-columns:1fr}}
+.pcard{background:var(--bg2);border:1px solid var(--rule);border-radius:16px;padding:34px 28px;position:relative;transition:transform .2s,border-color .2s}
+.pcard:hover{transform:translateY(-3px);border-color:var(--rule2)}
+.pcard.hot{background:var(--gold);border-color:var(--gold)}
+.pcard.hot .ptier,.pcard.hot .pdesc,.pcard.hot .pf li{color:rgba(0,0,0,.6)}
+.pcard.hot .pamnt{color:#000}
+.pcard.hot .pf li::before{color:#000}
+.hot-tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#000;color:var(--gold);font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 14px;border-radius:100px}
+.ptier{font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:11px;font-weight:700}
+.pamnt{font-family:var(--serif);font-size:2.9rem;font-weight:700;letter-spacing:-.04em;color:var(--text);line-height:1;margin-bottom:3px}
+.pamnt sup{font-size:1.1rem;vertical-align:top;margin-top:7px}
+.pdesc{font-size:.84rem;color:var(--muted);line-height:1.65;margin:12px 0 20px}
+.pf{list-style:none;margin-bottom:26px}
+.pf li{display:flex;align-items:flex-start;gap:8px;font-size:.84rem;color:var(--muted);margin-bottom:8px}
+.pf li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0}
+.pbtn{display:block;text-align:center;padding:12px;border-radius:8px;font-weight:700;font-size:.86rem;text-decoration:none;transition:opacity .2s;letter-spacing:.02em}
+.pbtn-g{background:var(--gold);color:#000}.pbtn-g:hover{opacity:.82}
+.pbtn-o{background:transparent;border:1px solid var(--rule2);color:var(--text)}.pbtn-o:hover{border-color:var(--dim)}
+.pcard.hot .pbtn-g{background:#000;color:var(--gold)}
+
+/* ── ABOUT ── */
+#about{background:var(--bg2)}
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+@media(max-width:740px){.about-wrap{grid-template-columns:1fr;gap:44px}}
+.about-copy p{font-size:.93rem;color:var(--muted);line-height:1.85;margin-bottom:15px}
+.founders{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.founder{background:var(--bg3);border:1px solid var(--rule);border-radius:13px;padding:28px 22px;text-align:center;transition:border-color .2s}
+.founder:hover{border-color:rgba(201,168,76,.3)}
+.fav{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 13px;font-family:var(--serif);font-size:1.2rem;font-weight:700;color:#000}
+.av-n{background:linear-gradient(135deg,var(--gold),#a07830)}
+.av-d{background:linear-gradient(135deg,#c0c0c0,#888)}
+.fname{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:3px}
+.frole{font-size:.71rem;color:var(--muted)}
+.loyola{grid-column:1/-1;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:13px 16px;text-align:center;font-size:.8rem;color:var(--gold);font-weight:600}
+
+/* ── FAQ ── */
+#faq{background:var(--bg)}
+.faq-wrap{display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start}
+@media(max-width:740px){.faq-wrap{grid-template-columns:1fr;gap:36px}}
+.faq-pin{position:sticky;top:84px}
+.faq-pin .lead{margin-top:14px}
+.faq-pin a{display:inline-block;margin-top:22px;font-size:.84rem;font-weight:700;color:var(--gold);text-decoration:none;letter-spacing:.03em}
+.faq-pin a:hover{text-decoration:underline}
+.fq-item{border-bottom:1px solid var(--rule)}
+.fq-btn{width:100%;background:none;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:20px 0;gap:16px;font-family:var(--sans);font-size:.9rem;font-weight:500;color:var(--text);text-align:left}
+.fq-ico{width:22px;height:22px;flex-shrink:0;border-radius:50%;border:1px solid var(--rule2);display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--muted);transition:transform .3s,border-color .3s,color .3s}
+.fq-item.open .fq-ico{transform:rotate(45deg);border-color:var(--gold);color:var(--gold)}
+.fq-ans{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s}
+.fq-item.open .fq-ans{max-height:220px;padding-bottom:18px}
+.fq-ans p{font-size:.87rem;color:var(--muted);line-height:1.78}
+
+/* ── CONTACT ── */
+#contact{background:var(--bg2)}
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+@media(max-width:740px){.contact-wrap{grid-template-columns:1fr;gap:44px}}
+.contact-left p{font-size:.93rem;color:var(--muted);line-height:1.8;margin:18px 0 30px}
+.clink{display:flex;align-items:center;gap:11px;margin-bottom:12px;text-decoration:none}
+.cico{width:36px;height:36px;border-radius:8px;background:var(--bg3);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.ctxt{font-size:.84rem;color:var(--muted)}
+.ctxt strong{display:block;color:var(--text);font-weight:600;font-size:.8rem;margin-bottom:1px}
+.cform{display:flex;flex-direction:column;gap:13px}
+.crow{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+@media(max-width:460px){.crow{grid-template-columns:1fr}}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg label{font-size:.71rem;color:var(--dim);font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.fg input,.fg select,.fg textarea{background:var(--bg3);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;color:var(--text);font-family:var(--sans);font-size:.88rem;outline:none;transition:border-color .2s;-webkit-appearance:none}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--dim)}
+.fg select option{background:var(--bg2)}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold)}
+.fg textarea{resize:vertical;min-height:105px}
+.csend{padding:14px;background:var(--gold);color:#000;border:none;cursor:pointer;border-radius:9px;font-size:.9rem;font-weight:700;font-family:var(--sans);letter-spacing:.03em;transition:opacity .2s,transform .2s;margin-top:4px}
+.csend:hover{opacity:.84;transform:translateY(-1px)}
+
+/* ── FOOTER ── */
+footer{background:var(--bg);border-top:1px solid var(--rule);padding:36px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.flogo{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--text);text-decoration:none}
+.flogo em{font-style:italic;color:var(--gold)}
+.flinks{display:flex;gap:20px;list-style:none}
+.flinks a{font-size:.78rem;color:var(--dim);text-decoration:none;transition:color .15s}
+.flinks a:hover{color:var(--muted)}
+.fcopy{font-size:.73rem;color:var(--dim)}
+
+/* ── ANIMATIONS ── */
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal.vis{opacity:1;transform:none}
+.stag>*{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+.stag.vis>*:nth-child(1){opacity:1;transform:none;transition-delay:0s}
+.stag.vis>*:nth-child(2){opacity:1;transform:none;transition-delay:.07s}
+.stag.vis>*:nth-child(3){opacity:1;transform:none;transition-delay:.14s}
+.stag.vis>*:nth-child(4){opacity:1;transform:none;transition-delay:.21s}
+.stag.vis>*:nth-child(5){opacity:1;transform:none;transition-delay:.28s}
+.stag.vis>*:nth-child(6){opacity:1;transform:none;transition-delay:.35s}
+.stag.vis>*:nth-child(7){opacity:1;transform:none;transition-delay:.42s}
+.stag.vis>*:nth-child(8){opacity:1;transform:none;transition-delay:.49s}
+.stag.vis>*:nth-child(9){opacity:1;transform:none;transition-delay:.56s}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a href="#hero" class="logo">T.S. <em>Pro</em></a>
+  <ul class="nl">
+
+    <!-- Services → links to each service card by id -->
+    <li>
+      <button>Services <span class="chev">▾</span></button>
+      <div class="dd">
+        <a href="#svc-website"><span class="di">🌐</span>Website Creation</a>
+        <a href="#svc-mobile"><span class="di">📱</span>Mobile-Friendly Design</a>
+        <a href="#svc-found"><span class="di">🔍</span>Built to Be Found</a>
+        <a href="#svc-updates"><span class="di">✏️</span>Simple Updates</a>
+      </div>
+    </li>
+
+    <li><a href="#examples">Examples</a></li>
+    <li><a href="#how">Process</a></li>
+
+    <!-- About → Who We Are + What We Do only -->
+    <li>
+      <button>About <span class="chev">▾</span></button>
+      <div class="dd">
+        <a href="#about"><span class="di">👥</span>Who We Are</a>
+        <a href="#what"><span class="di">💡</span>What We Do</a>
+      </div>
+    </li>
+
+    <li><a href="#pricing">Pricing</a></li>
+
+    <!-- More → FAQ + Contact Us -->
+    <li>
+      <button>More <span class="chev">▾</span></button>
+      <div class="dd">
+        <a href="#faq"><span class="di">❓</span>FAQ</a>
+        <a href="#contact"><span class="di">📧</span>Contact Us</a>
+        <hr>
+        <a href="#examples"><span class="di">🏢</span>Business Examples</a>
+      </div>
+    </li>
+
+  </ul>
+  <div class="nr">
+    <a href="#faq" class="ng">FAQ</a>
+    <a href="#contact" class="nc">Get Started</a>
+  </div>
+  <button class="burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- Mobile nav -->
+<div class="mob" id="mob">
+  <a href="#what" onclick="cm()">What We Do</a>
+  <a href="#examples" onclick="cm()">Examples</a>
+  <a href="#how" onclick="cm()">Process</a>
+  <a href="#about" onclick="cm()">About Us</a>
+  <a href="#pricing" onclick="cm()">Pricing</a>
+  <a href="#faq" onclick="cm()">FAQ</a>
+  <a href="#contact" class="mob-cta" onclick="cm()">Get Started →</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-pill"><span class="hdot"></span>AI-Powered Websites for Small Business</div>
+  <h1>Your Business<br><em>Online</em> — Without<br><span class="dim">the Hassle.</span></h1>
+  <p class="hero-lead">We use the latest AI tools to build clean, professional websites for local businesses fast and affordably. No tech background needed on your end — just tell us about your business and we handle the rest.</p>
+  <div class="hbtns">
+    <a href="#contact" class="btn-gold">Get Your Website</a>
+    <a href="#examples" class="btn-out">See Examples ↓</a>
+  </div>
+  <div class="hero-bar">
+    <div class="hstat"><div class="hstat-n">AI<em>+</em></div><div class="hstat-l">Powered Builds</div></div>
+    <div class="hstat"><div class="hstat-n">Fast<em>.</em></div><div class="hstat-l">Quick Turnaround</div></div>
+    <div class="hstat"><div class="hstat-n">100<em>%</em></div><div class="hstat-l">Custom Design</div></div>
+    <div class="hstat"><div class="hstat-n">2</div><div class="hstat-l">Real People</div></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq">
+  <div class="mq-t">
+    <span class="mq-i">HVAC <span class="mq-d"></span></span><span class="mq-i">Plumbing <span class="mq-d"></span></span><span class="mq-i">Tire Shops <span class="mq-d"></span></span><span class="mq-i">Restaurants <span class="mq-d"></span></span><span class="mq-i">Salons <span class="mq-d"></span></span><span class="mq-i">Dental Offices <span class="mq-d"></span></span><span class="mq-i">Law Firms <span class="mq-d"></span></span><span class="mq-i">Pet Care <span class="mq-d"></span></span><span class="mq-i">Gyms <span class="mq-d"></span></span><span class="mq-i">Contractors <span class="mq-d"></span></span>
+    <span class="mq-i">HVAC <span class="mq-d"></span></span><span class="mq-i">Plumbing <span class="mq-d"></span></span><span class="mq-i">Tire Shops <span class="mq-d"></span></span><span class="mq-i">Restaurants <span class="mq-d"></span></span><span class="mq-i">Salons <span class="mq-d"></span></span><span class="mq-i">Dental Offices <span class="mq-d"></span></span><span class="mq-i">Law Firms <span class="mq-d"></span></span><span class="mq-i">Pet Care <span class="mq-d"></span></span><span class="mq-i">Gyms <span class="mq-d"></span></span><span class="mq-i">Contractors <span class="mq-d"></span></span>
+  </div>
+</div>
+
+<!-- ═══ WHAT WE DO ═══ -->
+<section id="what" class="sec">
+  <div class="what-top reveal">
+    <div>
+      <span class="eyebrow">What We Do</span>
+      <h2 class="h2">We Build Your Website.<br>You Run Your Business.</h2>
+    </div>
+    <p class="lead">We use AI tools to create professional websites for small businesses quickly and at a price that actually makes sense.</p>
+  </div>
+  <div class="what-grid stag">
+    <div class="wcard" id="svc-website">
+      <span class="wico">🌐</span>
+      <h3>Custom Website Creation</h3>
+      <p>We design and build a website tailored to your business using the latest AI tools. You get a professional, good-looking site without paying agency prices. Every site is unique — not a recycled template.</p>
+    </div>
+    <div class="wcard" id="svc-mobile">
+      <span class="wico">📱</span>
+      <h3>Mobile-Friendly Design</h3>
+      <p>Most of your customers are finding you on their phones. Every site we build looks and works great on any device — phone, tablet, or desktop — right out of the box.</p>
+    </div>
+    <div class="wcard" id="svc-found">
+      <span class="wico">🔍</span>
+      <h3>Built to Be Found</h3>
+      <p>We set up your site so search engines like Google can find it. Your business name, location, and services are structured correctly so customers in your area can discover you.</p>
+    </div>
+    <div class="wcard" id="svc-updates">
+      <span class="wico">✏️</span>
+      <h3>Simple Updates & Changes</h3>
+      <p>Need to update your hours, add a new service, or change a photo? Send us a message and we'll take care of it — no complicated logins or tech knowledge required on your end.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section id="how" class="sec">
+  <div class="how-grid">
+    <div class="reveal">
+      <span class="eyebrow">How It Works</span>
+      <h2 class="h2">Simple from<br>Start to Launch</h2>
+      <div class="steps-list">
+        <div class="step-row"><div class="step-num">01</div><div class="step-body"><h3>You Tell Us About Your Business</h3><p>We have a quick, casual conversation. Just tell us what you do, who your customers are, and what you want your website to accomplish.</p></div></div>
+        <div class="step-row"><div class="step-num">02</div><div class="step-body"><h3>We Build It Using AI</h3><p>We use powerful AI tools to design and build your custom website fast. You don't need to understand how it works — that's our job.</p></div></div>
+        <div class="step-row"><div class="step-num">03</div><div class="step-body"><h3>You Review & Approve</h3><p>We show you the site before it goes live. If anything needs tweaking — colors, wording, layout — we fix it until you're happy.</p></div></div>
+        <div class="step-row"><div class="step-num">04</div><div class="step-body"><h3>Your Site Goes Live</h3><p>We publish your site and make sure it's findable on Google. You get a real web address you can share with customers right away.</p></div></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="how-right">
+        <h3>What You Can Expect From Us</h3>
+        <ul class="promise-list">
+          <li><span class="pcheck">✦</span>A real website built specifically for your business — not a template anyone can download</li>
+          <li><span class="pcheck">✦</span>Plain English communication the whole way — no confusing tech talk</li>
+          <li><span class="pcheck">✦</span>Fast turnaround — most sites are ready to review within a week</li>
+          <li><span class="pcheck">✦</span>A site that works on phones, tablets, and computers</li>
+          <li><span class="pcheck">✦</span>Your business set up correctly so Google can find you</li>
+          <li><span class="pcheck">✦</span>Two real people — Nathan and Dylan — on your project start to finish</li>
+          <li><span class="pcheck">✦</span>No hidden fees, no surprise charges</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EXAMPLES ═══ -->
+<section id="examples" class="sec">
+  <div class="ex-top reveal">
+    <div>
+      <span class="eyebrow">Business Examples</span>
+      <h2 class="h2">We Build Sites for<br>Businesses Like Yours</h2>
+    </div>
+    <p class="lead">Take a look at the kinds of businesses we build websites for and what each site includes.</p>
+  </div>
+  <div class="cats" id="cats">
+    <button class="cat on" data-f="all">All</button>
+    <button class="cat" data-f="trade">Trades</button>
+    <button class="cat" data-f="health">Health</button>
+    <button class="cat" data-f="food">Food & Lifestyle</button>
+    <button class="cat" data-f="pro">Professional</button>
+  </div>
+  <div class="biz-grid stag" id="bizg">
+
+    <!-- HVAC -->
+    <div class="biz-card" data-c="trade">
+      <svg class="site-preview" viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="190" fill="#0d1b2e"/>
+        <!-- browser bar -->
+        <rect width="400" height="26" fill="#07111f"/>
+        <circle cx="14" cy="13" r="4" fill="#ff5f57"/><circle cx="26" cy="13" r="4" fill="#febc2e"/><circle cx="38" cy="13" r="4" fill="#28c840"/>
+        <rect x="52" y="7" width="200" height="12" rx="3" fill="#0f1e30"/>
+        <text x="58" y="17" font-size="7" fill="#2a4a6a" font-family="monospace">arcticcomforthvac.com</text>
+        <!-- hero bg -->
+        <rect y="26" width="400" height="100" fill="#1565c0"/>
+        <rect y="26" width="400" height="100" fill="url(#hvac-grad)"/>
+        <defs><linearGradient id="hvac-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1565c0"/><stop offset="100%" stop-color="#0d47a1"/></linearGradient></defs>
+        <!-- nav bar -->
+        <rect y="26" width="400" height="22" fill="rgba(0,0,0,0.3)"/>
+        <text x="14" y="41" font-size="9" fill="white" font-family="sans-serif" font-weight="bold">❄ Arctic Comfort</text>
+        <text x="280" y="41" font-size="7" fill="rgba(255,255,255,0.7)" font-family="sans-serif">Services  About  Contact</text>
+        <!-- hero content -->
+        <text x="14" y="78" font-size="14" fill="white" font-family="sans-serif" font-weight="bold">Heating &amp; Cooling</text>
+        <text x="14" y="93" font-size="14" fill="white" font-family="sans-serif" font-weight="bold">You Can Trust</text>
+        <text x="14" y="107" font-size="7" fill="rgba(255,255,255,0.7)" font-family="sans-serif">24/7 Emergency Service · Licensed &amp; Insured</text>
+        <rect x="14" y="114" width="80" height="18" rx="4" fill="#42a5f5"/>
+        <text x="24" y="126" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">Call Now: 555-0100</text>
+        <!-- services strip -->
+        <rect y="126" width="400" height="64" fill="#0a1628"/>
+        <rect x="14" y="136" width="108" height="42" rx="4" fill="#112240"/>
+        <text x="27" y="152" font-size="8" fill="#42a5f5" font-family="sans-serif">🌡</text><text x="38" y="152" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">AC Repair</text>
+        <text x="27" y="168" font-size="6" fill="#666" font-family="sans-serif">Fast same-day service</text>
+        <rect x="132" y="136" width="108" height="42" rx="4" fill="#112240"/>
+        <text x="145" y="152" font-size="8" fill="#42a5f5" font-family="sans-serif">🔥</text><text x="156" y="152" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">Heating</text>
+        <text x="145" y="168" font-size="6" fill="#666" font-family="sans-serif">All makes &amp; models</text>
+        <rect x="250" y="136" width="108" height="42" rx="4" fill="#112240"/>
+        <text x="263" y="152" font-size="8" fill="#42a5f5" font-family="sans-serif">🔧</text><text x="274" y="152" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">Maintenance</text>
+        <text x="263" y="168" font-size="6" fill="#666" font-family="sans-serif">Seasonal tune-ups</text>
+      </svg>
+      <div class="binfo"><div class="btop"><span class="bico">❄️</span><div><div class="bname">Arctic Comfort HVAC</div><div class="btype">Heating & Cooling</div></div></div><p class="bdesc">Services listed clearly, a phone number front and center, service area info, and a contact form so customers can reach you day or night.</p><div class="btags"><span class="btag">Contact Form</span><span class="btag">Service List</span><span class="btag">Click-to-Call</span></div></div>
+    </div>
+
+    <!-- PLUMBING -->
+    <div class="biz-card" data-c="trade">
+      <svg class="site-preview" viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="190" fill="#0a1e1b"/>
+        <rect width="400" height="26" fill="#061410"/>
+        <circle cx="14" cy="13" r="4" fill="#ff5f57"/><circle cx="26" cy="13" r="4" fill="#febc2e"/><circle cx="38" cy="13" r="4" fill="#28c840"/>
+        <rect x="52" y="7" width="200" height="12" rx="3" fill="#0d201c"/>
+        <text x="58" y="17" font-size="7" fill="#1a3d36" font-family="monospace">flowmasterplumbing.com</text>
+        <rect y="26" width="400" height="100" fill="#00695c"/>
+        <rect y="26" width="400" height="22" fill="rgba(0,0,0,0.35)"/>
+        <text x="14" y="41" font-size="9" fill="white" font-family="sans-serif" font-weight="bold">🔧 FlowMaster</text>
+        <text x="280" y="41" font-size="7" fill="rgba(255,255,255,0.7)" font-family="sans-serif">Services  Area  Contact</text>
+        <text x="14" y="78" font-size="13" fill="white" font-family="sans-serif" font-weight="bold">Professional Plumbing</text>
+        <text x="14" y="93" font-size="13" fill="white" font-family="sans-serif" font-weight="bold">Done Right.</text>
+        <text x="14" y="107" font-size="7" fill="rgba(255,255,255,0.7)" font-family="sans-serif">Licensed · Insured · Available 24/7</text>
+        <rect x="14" y="113" width="90" height="18" rx="4" fill="#4db6ac"/>
+        <text x="22" y="125" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">Get Free Estimate</text>
+        <rect y="126" width="400" height="64" fill="#061410"/>
+        <rect x="14" y="136" width="110" height="42" rx="4" fill="#0d201c"/>
+        <text x="24" y="155" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">🚿 Drain Cleaning</text>
+        <text x="24" y="168" font-size="6" fill="#555" font-family="sans-serif">Fast response time</text>
+        <rect x="134" y="136" width="110" height="42" rx="4" fill="#0d201c"/>
+        <text x="144" y="155" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">💧 Leak Repair</text>
+        <text x="144" y="168" font-size="6" fill="#555" font-family="sans-serif">Emergency available</text>
+        <rect x="254" y="136" width="110" height="42" rx="4" fill="#0d201c"/>
+        <text x="264" y="155" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">🏠 Installations</text>
+        <text x="264" y="168" font-size="6" fill="#555" font-family="sans-serif">Fixtures &amp; pipes</text>
+      </svg>
+      <div class="binfo"><div class="btop"><span class="bico">🔧</span><div><div class="bname">FlowMaster Plumbing</div><div class="btype">Plumbing Services</div></div></div><p class="bdesc">A professional-looking site that builds trust instantly — with your services, coverage area, and a one-tap call button for emergencies.</p><div class="btags"><span class="btag">Emergency CTA</span><span class="btag">Coverage Area</span><span class="btag">Reviews</span></div></div>
+    </div>
+
+    <!-- TIRE SHOP -->
+    <div class="biz-card" data-c="trade">
+      <svg class="site-preview" viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="190" fill="#111"/>
+        <rect width="400" height="26" fill="#080808"/>
+        <circle cx="14" cy="13" r="4" fill="#ff5f57"/><circle cx="26" cy="13" r="4" fill="#febc2e"/><circle cx="38" cy="13" r="4" fill="#28c840"/>
+        <rect x="52" y="7" width="200" height="12" rx="3" fill="#141414"/>
+        <text x="58" y="17" font-size="7" fill="#333" font-family="monospace">ridequicktires.com</text>
+        <rect y="26" width="400" height="100" fill="#1c1c1c"/>
+        <!-- tire graphic -->
+        <circle cx="340" cy="76" r="55" fill="#111" opacity="0.8"/>
+        <circle cx="340" cy="76" r="42" fill="none" stroke="#333" stroke-width="14"/>
+        <circle cx="340" cy="76" r="18" fill="#222"/>
+        <rect y="26" width="400" height="22" fill="rgba(0,0,0,0.5)"/>
+        <text x="14" y="41" font-size="9" fill="white" font-family="sans-serif" font-weight="bold">🏎 RideQuick Tires</text>
+        <text x="270" y="41" font-size="7" fill="rgba(255,255,255,0.6)" font-family="sans-serif">Services  Brands  Book</text>
+        <text x="14" y="76" font-size="13" fill="white" font-family="sans-serif" font-weight="bold">Quality Tires.</text>
+        <text x="14" y="91" font-size="13" fill="#f44336" font-family="sans-serif" font-weight="bold">Unbeatable Prices.</text>
+        <text x="14" y="107" font-size="7" fill="#777" font-family="sans-serif">Installation · Rotation · Balancing · Alignment</text>
+        <rect x="14" y="113" width="85" height="18" rx="4" fill="#f44336"/>
+        <text x="22" y="125" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">Book Appointment</text>
+        <rect y="126" width="400" height="64" fill="#0a0a0a"/>
+        <rect x="14" y="136" width="108" height="42" rx="4" fill="#181818"/>
+        <text x="24" y="152" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">🛞 New Tires</text>
+        <text x="24" y="165" font-size="6" fill="#555" font-family="sans-serif">All brands &amp; sizes</text>
+        <rect x="132" y="136" width="108" height="42" rx="4" fill="#181818"/>
+        <text x="142" y="152" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">⚙ Alignment</text>
+        <text x="142" y="165" font-size="6" fill="#555" font-family="sans-serif">Computer precision</text>
+        <rect x="250" y="136" width="108" height="42" rx="4" fill="#181818"/>
+        <text x="260" y="152" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">🔩 Rotation</text>
+        <text x="260" y="165" font-size="6" fill="#555" font-family="sans-serif">Extend tire life</text>
+      </svg>
+      <div class="binfo"><div class="btop"><span class="bico">🏎️</span><div><div class="bname">RideQuick Tire Shop</div><div class="btype">Auto Services</div></div></div><p class="bdesc">Service menu, hours, location map, and a simple way for customers to reach you — everything a tire shop needs to bring in more business.</p><div class="btags"><span class="btag">Hours & Location</span><span class="btag">Services Menu</span><span class="btag">Contact Form</span></div></div>
+    </div>
+
+    <!-- RESTAURANT -->
+    <div class="biz-card" data-c="food">
+      <svg class="site-preview" viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="190" fill="#1a0800"/>
+        <rect width="400" height="26" fill="#100500"/>
+        <circle cx="14" cy="13" r="4" fill="#ff5f57"/><circle cx="26" cy="13" r="4" fill="#febc2e"/><circle cx="38" cy="13" r="4" fill="#28c840"/>
+        <rect x="52" y="7" width="200" height="12" rx="3" fill="#1a0a00"/>
+        <text x="58" y="17" font-size="7" fill="#3d1a00" font-family="monospace">mamamiaskitchen.com</text>
+        <rect y="26" width="400" height="100" fill="#bf360c"/>
+        <defs><linearGradient id="rest-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#bf360c"/><stop offset="100%" stop-color="#8b1a00"/></linearGradient></defs>
+        <rect y="26" width="400" height="100" fill="url(#rest-g)"/>
+        <!-- decorative circles -->
+        <circle cx="320" cy="76" r="60" fill="rgba(255,255,255,0.04)"/>
+        <circle cx="320" cy="76" r="40" fill="rgba(255,255,255,0.04)"/>
+        <rect y="26" width="400" height="22" fill="rgba(0,0,0,0.4)"/>
+        <text x="14" y="41" font-size="9" fill="#ffcc02" font-family="sans-serif" font-weight="bold">🍝 Mama Mia's Kitchen</text>
+        <text x="270" y="41" font-size="7" fill="rgba(255,255,255,0.7)" font-family="sans-serif">Menu  Hours  Reserve</text>
+        <text x="14" y="72" font-size="11" fill="rgba(255,255,255,0.6)" font-family="sans-serif" font-style="italic">Authentic Italian Since 1998</text>
+        <text x="14" y="90" font-size="13" fill="white" font-family="sans-serif" font-weight="bold">Made with Love,</text>
+        <text x="14" y="105" font-size="13" fill="#ffcc02" font-family="sans-serif" font-weight="bold">Served with Passion.</text>
+        <rect x="14" y="112" width="80" height="18" rx="4" fill="#ffcc02"/>
+        <text x="22" y="124" font-size="7" fill="#000" font-family="sans-serif" font-weight="bold">View Our Menu</text>
+        <rect y="126" width="400" height="64" fill="#0d0300"/>
+        <rect x="14" y="134" width="370" height="1" fill="#2a1000"/>
+        <text x="14" y="150" font-size="8" fill="#ffcc02" font-family="sans-serif" font-weight="bold">📍 Hours</text>
+        <text x="14" y="162" font-size="7" fill="#777" font-family="sans-serif">Mon–Sat: 11am–10pm</text>
+        <text x="14" y="174" font-size="7" fill="#777" font-family="sans-serif">Sun: 12pm–9pm</text>
+        <text x="160" y="150" font-size="8" fill="#ffcc02" font-family="sans-serif" font-weight="bold">📞 Reservations</text>
+        <text x="160" y="162" font-size="7" fill="#777" font-family="sans-serif">(555) 234-5678</text>
+        <rect x="270" y="138" width="110" height="36" rx="4" fill="#1a0800" stroke="#2a1000" stroke-width="1"/>
+        <text x="285" y="156" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">Book a Table</text>
+        <text x="285" y="168" font-size="6" fill="#555" font-family="sans-serif">Online reservation</text>
+      </svg>
+      <div class="binfo"><div class="btop"><span class="bico">🍝</span><div><div class="bname">Mama Mia's Kitchen</div><div class="btype">Restaurant</div></div></div><p class="bdesc">Menu display, hours, address, and a contact page — all the info customers look up before deciding where to eat, laid out cleanly.</p><div class="btags"><span class="btag">Menu Page</span><span class="btag">Hours & Location</span><span class="btag">Contact</span></div></div>
+    </div>
+
+    <!-- SALON -->
+    <div class="biz-card" data-c="food">
+      <svg class="site-preview" viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="190" fill="#1a0820"/>
+        <rect width="400" height="26" fill="#100518"/>
+        <circle cx="14" cy="13" r="4" fill="#ff5f57"/><circle cx="26" cy="13" r="4" fill="#febc2e"/><circle cx="38" cy="13" r="4" fill="#28c840"/>
+        <rect x="52" y="7" width="200" height="12" rx="3" fill="#1a0820"/>
+        <text x="58" y="17" font-size="7" fill="#3d1050" font-family="monospace">luxelocksalon.com</text>
+        <defs><linearGradient id="sal-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#880e4f"/><stop offset="100%" stop-color="#4a148c"/></linearGradient></defs>
+        <rect y="26" width="400" height="100" fill="url(#sal-g)"/>
+        <!-- decorative -->
+        <circle cx="350" cy="55" r="70" fill="rgba(255,255,255,0.03)"/>
+        <rect y="26" width="400" height="22" fill="rgba(0,0,0,0.3)"/>
+        <text x="14" y="41" font-size="9" fill="#f48fb1" font-family="sans-serif" font-weight="bold">✂ Luxe Lock Salon</text>
+        <text x="268" y="41" font-size="7" fill="rgba(255,255,255,0.7)" font-family="sans-serif">Services  Gallery  Book</text>
+        <text x="14" y="74" font-size="11" fill="rgba(255,255,255,0.5)" font-family="sans-serif" font-style="italic">Where style meets confidence</text>
+        <text x="14" y="90" font-size="14" fill="white" font-family="sans-serif" font-weight="bold">Look Your Best.</text>
+        <text x="14" y="106" font-size="14" fill="#f48fb1" font-family="sans-serif" font-weight="bold">Feel Amazing.</text>
+        <rect x="14" y="113" width="80" height="18" rx="4" fill="#f48fb1"/>
+        <text x="24" y="125" font-size="7" fill="#000" font-family="sans-serif" font-weight="bold">Book Appointment</text>
+        <rect y="126" width="400" height="64" fill="#0d0316"/>
+        <rect x="14" y="136" width="85" height="42" rx="4" fill="#1a0828" stroke="#2a1040" stroke-width="1"/>
+        <text x="24" y="152" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">💇 Haircut</text>
+        <text x="24" y="165" font-size="6" fill="#555" font-family="sans-serif">from $35</text>
+        <rect x="109" y="136" width="85" height="42" rx="4" fill="#1a0828" stroke="#2a1040" stroke-width="1"/>
+        <text x="119" y="152" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">🎨 Color</text>
+        <text x="119" y="165" font-size="6" fill="#555" font-family="sans-serif">from $75</text>
+        <rect x="204" y="136" width="85" height="42" rx="4" fill="#1a0828" stroke="#2a1040" stroke-width="1"/>
+        <text x="214" y="152" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">💅 Styling</text>
+        <text x="214" y="165" font-size="6" fill="#555" font-family="sans-serif">from $45</text>
+        <rect x="299" y="136" width="85" height="42" rx="4" fill="#f48fb1"/>
+        <text x="309" y="152" font-size="7" fill="#000" font-family="sans-serif" font-weight="bold">Book Now</text>
+        <text x="309" y="165" font-size="6" fill="rgba(0,0,0,0.6)" font-family="sans-serif">Online booking</text>
+      </svg>
+      <div class="binfo"><div class="btop"><span class="bico">✂️</span><div><div class="bname">Luxe Lock Salon</div><div class="btype">Hair & Beauty</div></div></div><p class="bdesc">Services and pricing listed clearly, a photo section, hours, and an easy way for clients to get in touch or book — all in one clean page.</p><div class="btags"><span class="btag">Services & Pricing</span><span class="btag">Photo Section</span><span class="btag">Contact</span></div></div>
+    </div>
+
+    <!-- DENTAL -->
+    <div class="biz-card" data-c="health">
+      <svg class="site-preview" viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="190" fill="#f0f8ff"/>
+        <rect width="400" height="26" fill="#e0f0ff"/>
+        <circle cx="14" cy="13" r="4" fill="#ff5f57"/><circle cx="26" cy="13" r="4" fill="#febc2e"/><circle cx="38" cy="13" r="4" fill="#28c840"/>
+        <rect x="52" y="7" width="200" height="12" rx="3" fill="#cce5ff"/>
+        <text x="58" y="17" font-size="7" fill="#6aaedf" font-family="monospace">brightsmilesdental.com</text>
+        <rect y="26" width="400" height="22" fill="#0277bd"/>
+        <text x="14" y="41" font-size="9" fill="white" font-family="sans-serif" font-weight="bold">🦷 Bright Smiles Dental</text>
+        <text x="256" y="41" font-size="7" fill="rgba(255,255,255,0.8)" font-family="sans-serif">Services  Insurance  Book</text>
+        <!-- hero -->
+        <rect y="48" width="400" height="78" fill="white"/>
+        <rect y="48" width="220" height="78" fill="#e8f4fd"/>
+        <text x="14" y="68" font-size="7" fill="#0277bd" font-family="sans-serif" font-weight="bold" letter-spacing="2">YOUR SMILE MATTERS</text>
+        <text x="14" y="84" font-size="12" fill="#1a1a1a" font-family="sans-serif" font-weight="bold">Gentle. Caring.</text>
+        <text x="14" y="99" font-size="12" fill="#1a1a1a" font-family="sans-serif" font-weight="bold">Professional.</text>
+        <rect x="14" y="107" width="90" height="16" rx="4" fill="#0277bd"/>
+        <text x="22" y="119" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">Book Appointment</text>
+        <!-- tooth graphic -->
+        <ellipse cx="320" cy="87" rx="50" ry="35" fill="#e0f0ff"/>
+        <text x="295" y="93" font-size="28" font-family="sans-serif">🦷</text>
+        <!-- services -->
+        <rect y="126" width="400" height="64" fill="#f7fbff"/>
+        <rect x="14" y="136" width="108" height="40" rx="4" fill="white" stroke="#ddeeff" stroke-width="1"/>
+        <text x="24" y="152" font-size="7" fill="#0277bd" font-family="sans-serif" font-weight="bold">🔬 Cleanings</text>
+        <text x="24" y="165" font-size="6" fill="#aaa" font-family="sans-serif">Every 6 months</text>
+        <rect x="132" y="136" width="108" height="40" rx="4" fill="white" stroke="#ddeeff" stroke-width="1"/>
+        <text x="142" y="152" font-size="7" fill="#0277bd" font-family="sans-serif" font-weight="bold">✨ Whitening</text>
+        <text x="142" y="165" font-size="6" fill="#aaa" font-family="sans-serif">Professional grade</text>
+        <rect x="250" y="136" width="108" height="40" rx="4" fill="white" stroke="#ddeeff" stroke-width="1"/>
+        <text x="260" y="152" font-size="7" fill="#0277bd" font-family="sans-serif" font-weight="bold">🏥 New Patients</text>
+        <text x="260" y="165" font-size="6" fill="#aaa" font-family="sans-serif">Welcome!</text>
+      </svg>
+      <div class="binfo"><div class="btop"><span class="bico">🦷</span><div><div class="bname">Bright Smiles Dental</div><div class="btype">Dental Office</div></div></div><p class="bdesc">A clean, trustworthy site with your services, office hours, location, and a contact form for new patients — simple and professional.</p><div class="btags"><span class="btag">Services List</span><span class="btag">Office Hours</span><span class="btag">New Patient Form</span></div></div>
+    </div>
+
+    <!-- PET CARE -->
+    <div class="biz-card" data-c="health">
+      <svg class="site-preview" viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="190" fill="#0d1f0e"/>
+        <rect width="400" height="26" fill="#081508"/>
+        <circle cx="14" cy="13" r="4" fill="#ff5f57"/><circle cx="26" cy="13" r="4" fill="#febc2e"/><circle cx="38" cy="13" r="4" fill="#28c840"/>
+        <rect x="52" y="7" width="200" height="12" rx="3" fill="#0d1e0d"/>
+        <text x="58" y="17" font-size="7" fill="#1a3d1a" font-family="monospace">pawsandplaypetcare.com</text>
+        <defs><linearGradient id="pet-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2e7d32"/><stop offset="100%" stop-color="#1b5e20"/></linearGradient></defs>
+        <rect y="26" width="400" height="100" fill="url(#pet-g)"/>
+        <rect y="26" width="400" height="22" fill="rgba(0,0,0,0.3)"/>
+        <text x="14" y="41" font-size="9" fill="#aed581" font-family="sans-serif" font-weight="bold">🐾 Paws &amp; Play</text>
+        <text x="268" y="41" font-size="7" fill="rgba(255,255,255,0.7)" font-family="sans-serif">Services  Gallery  Book</text>
+        <text x="14" y="74" font-size="11" fill="rgba(255,255,255,0.6)" font-family="sans-serif" font-style="italic">Because your pet deserves the best</text>
+        <text x="14" y="90" font-size="14" fill="white" font-family="sans-serif" font-weight="bold">Grooming &amp; Boarding</text>
+        <text x="14" y="106" font-size="14" fill="#aed581" font-family="sans-serif" font-weight="bold">They'll Love.</text>
+        <rect x="14" y="113" width="85" height="18" rx="4" fill="#aed581"/>
+        <text x="22" y="125" font-size="7" fill="#000" font-family="sans-serif" font-weight="bold">Book a Visit Today</text>
+        <rect y="126" width="400" height="64" fill="#060f06"/>
+        <rect x="14" y="136" width="108" height="42" rx="4" fill="#0d1e0d"/>
+        <text x="24" y="153" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">🛁 Grooming</text>
+        <text x="24" y="166" font-size="6" fill="#555" font-family="sans-serif">Bath, cut &amp; style</text>
+        <rect x="132" y="136" width="108" height="42" rx="4" fill="#0d1e0d"/>
+        <text x="142" y="153" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">🏡 Boarding</text>
+        <text x="142" y="166" font-size="6" fill="#555" font-family="sans-serif">Safe overnight stays</text>
+        <rect x="250" y="136" width="108" height="42" rx="4" fill="#0d1e0d"/>
+        <text x="260" y="153" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">🦮 Daycare</text>
+        <text x="260" y="166" font-size="6" fill="#555" font-family="sans-serif">Play while you work</text>
+      </svg>
+      <div class="binfo"><div class="btop"><span class="bico">🐾</span><div><div class="bname">Paws & Play Pet Care</div><div class="btype">Grooming & Boarding</div></div></div><p class="bdesc">Services, pricing, hours, and a friendly contact form — everything pet owners look for when choosing someone to trust with their animals.</p><div class="btags"><span class="btag">Services & Pricing</span><span class="btag">Contact Form</span><span class="btag">Hours</span></div></div>
+    </div>
+
+    <!-- GYM -->
+    <div class="biz-card" data-c="health">
+      <svg class="site-preview" viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="190" fill="#0f0000"/>
+        <rect width="400" height="26" fill="#080000"/>
+        <circle cx="14" cy="13" r="4" fill="#ff5f57"/><circle cx="26" cy="13" r="4" fill="#febc2e"/><circle cx="38" cy="13" r="4" fill="#28c840"/>
+        <rect x="52" y="7" width="200" height="12" rx="3" fill="#140000"/>
+        <text x="58" y="17" font-size="7" fill="#330000" font-family="monospace">ironedgefitness.com</text>
+        <defs><linearGradient id="gym-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#b71c1c"/><stop offset="100%" stop-color="#7b0000"/></linearGradient></defs>
+        <rect y="26" width="400" height="100" fill="url(#gym-g)"/>
+        <!-- diagonal stripe -->
+        <polygon points="200,26 400,26 400,126 300,126" fill="rgba(0,0,0,0.2)"/>
+        <rect y="26" width="400" height="22" fill="rgba(0,0,0,0.4)"/>
+        <text x="14" y="41" font-size="9" fill="white" font-family="sans-serif" font-weight="bold">💪 IRON EDGE FITNESS</text>
+        <text x="265" y="41" font-size="7" fill="rgba(255,255,255,0.6)" font-family="sans-serif">Classes  Plans  Join</text>
+        <text x="14" y="74" font-size="8" fill="rgba(255,255,255,0.5)" font-family="sans-serif" letter-spacing="3">NO LIMITS. NO EXCUSES.</text>
+        <text x="14" y="90" font-size="14" fill="white" font-family="sans-serif" font-weight="bold">Train Harder.</text>
+        <text x="14" y="106" font-size="14" fill="#ff5722" font-family="sans-serif" font-weight="bold">Get Results.</text>
+        <rect x="14" y="112" width="100" height="18" rx="4" fill="#ff5722"/>
+        <text x="20" y="124" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">Start Free Trial Today</text>
+        <rect y="126" width="400" height="64" fill="#080000"/>
+        <rect x="14" y="136" width="108" height="42" rx="4" fill="#140000" stroke="#330000" stroke-width="1"/>
+        <text x="24" y="153" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">🏋 Weightlifting</text>
+        <text x="24" y="166" font-size="6" fill="#555" font-family="sans-serif">Full equipment</text>
+        <rect x="132" y="136" width="108" height="42" rx="4" fill="#140000" stroke="#330000" stroke-width="1"/>
+        <text x="142" y="153" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">🔥 Classes</text>
+        <text x="142" y="166" font-size="6" fill="#555" font-family="sans-serif">Daily schedule</text>
+        <rect x="250" y="136" width="108" height="42" rx="4" fill="#ff5722"/>
+        <text x="260" y="153" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">📋 Memberships</text>
+        <text x="260" y="166" font-size="6" fill="rgba(255,255,255,0.7)" font-family="sans-serif">From $29/mo</text>
+      </svg>
+      <div class="binfo"><div class="btop"><span class="bico">💪</span><div><div class="bname">Iron Edge Fitness</div><div class="btype">Gym & Training</div></div></div><p class="bdesc">Membership options, class schedule, location, and a contact section — a straightforward site that turns website visitors into paying members.</p><div class="btags"><span class="btag">Membership Info</span><span class="btag">Schedule</span><span class="btag">Contact</span></div></div>
+    </div>
+
+    <!-- LAW FIRM -->
+    <div class="biz-card" data-c="pro">
+      <svg class="site-preview" viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="190" fill="#f5f3ee"/>
+        <rect width="400" height="26" fill="#ede9e0"/>
+        <circle cx="14" cy="13" r="4" fill="#ff5f57"/><circle cx="26" cy="13" r="4" fill="#febc2e"/><circle cx="38" cy="13" r="4" fill="#28c840"/>
+        <rect x="52" y="7" width="200" height="12" rx="3" fill="#ddd9d0"/>
+        <text x="58" y="17" font-size="7" fill="#aaa" font-family="monospace">harrisandassociates.com</text>
+        <!-- dark nav -->
+        <rect y="26" width="400" height="28" fill="#111"/>
+        <text x="14" y="44" font-size="9" fill="#c9a84c" font-family="sans-serif" font-weight="bold">HARRIS &amp; ASSOCIATES</text>
+        <text x="240" y="44" font-size="7" fill="rgba(255,255,255,0.5)" font-family="sans-serif">Practice Areas  Team  Contact</text>
+        <!-- hero split -->
+        <rect y="54" width="240" height="72" fill="#1a1a1a"/>
+        <rect y="54" width="240" height="72" fill="url(#law-g)"/>
+        <defs><linearGradient id="law-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#2a1e00"/></linearGradient></defs>
+        <text x="14" y="76" font-size="8" fill="#c9a84c" font-family="sans-serif" letter-spacing="2">TRUSTED LEGAL COUNSEL</text>
+        <text x="14" y="93" font-size="11" fill="white" font-family="sans-serif" font-weight="bold">Fighting for Your</text>
+        <text x="14" y="107" font-size="11" fill="white" font-family="sans-serif" font-weight="bold">Rights Since 1995.</text>
+        <rect x="240" y="54" width="160" height="72" fill="#f0ece0"/>
+        <text x="252" y="76" font-size="7" fill="#555" font-family="sans-serif" font-weight="bold">FREE CONSULTATION</text>
+        <rect x="252" y="82" width="130" height="1" fill="#ddd"/>
+        <text x="252" y="96" font-size="6" fill="#888" font-family="sans-serif">Name</text>
+        <rect x="252" y="99" width="130" height="10" rx="2" fill="white" stroke="#ddd" stroke-width="1"/>
+        <text x="252" y="115" font-size="6" fill="#888" font-family="sans-serif">Phone</text>
+        <rect x="252" y="118" width="130" height="10" rx="2" fill="white" stroke="#ddd" stroke-width="1"/>
+        <!-- practice areas -->
+        <rect y="126" width="400" height="64" fill="white"/>
+        <rect x="0" y="126" width="400" height="1" fill="#e0dcd0"/>
+        <text x="14" y="142" font-size="7" fill="#888" font-family="sans-serif" letter-spacing="2">PRACTICE AREAS</text>
+        <rect x="14" y="148" width="82" height="28" rx="3" fill="#f5f3ee" stroke="#e0dcd0" stroke-width="1"/>
+        <text x="24" y="165" font-size="6" fill="#333" font-family="sans-serif" font-weight="bold">⚖ Personal Injury</text>
+        <rect x="106" y="148" width="82" height="28" rx="3" fill="#f5f3ee" stroke="#e0dcd0" stroke-width="1"/>
+        <text x="116" y="165" font-size="6" fill="#333" font-family="sans-serif" font-weight="bold">🏠 Real Estate</text>
+        <rect x="198" y="148" width="82" height="28" rx="3" fill="#f5f3ee" stroke="#e0dcd0" stroke-width="1"/>
+        <text x="208" y="165" font-size="6" fill="#333" font-family="sans-serif" font-weight="bold">👨‍👩‍👧 Family Law</text>
+        <rect x="290" y="148" width="96" height="28" rx="3" fill="#c9a84c"/>
+        <text x="304" y="165" font-size="6" fill="white" font-family="sans-serif" font-weight="bold">Book Consult →</text>
+      </svg>
+      <div class="binfo"><div class="btop"><span class="bico">⚖️</span><div><div class="bname">Harris & Associates</div><div class="btype">Law Firm</div></div></div><p class="bdesc">A credible, professional site with practice areas, contact info, and a consultation request form — designed to earn trust at first glance.</p><div class="btags"><span class="btag">Practice Areas</span><span class="btag">Contact Form</span><span class="btag">Professional Design</span></div></div>
+    </div>
+
+  </div>
+  <div style="text-align:center;margin-top:48px" class="reveal">
+    <p style="font-size:.88rem;color:var(--muted);margin-bottom:18px">Don't see your type of business? We work with all kinds of local businesses.</p>
+    <a href="#contact" class="btn-gold" style="display:inline-block">Get in Touch</a>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section id="pricing" class="sec">
+  <div class="p-top reveal">
+    <span class="eyebrow">Pricing</span>
+    <h2 class="h2">Straightforward Pricing.<br>No Surprises.</h2>
+    <p class="lead">We keep our prices fair and simple. No hidden fees, no monthly subscriptions unless you want them.</p>
+  </div>
+  <div class="p-row stag">
+    <div class="pcard">
+      <p class="ptier">Basic</p>
+      <div class="pamnt"><sup>$</sup>299</div>
+      <p class="pdesc">Perfect for businesses that just need to get online with something clean and professional.</p>
+      <ul class="pf">
+        <li>Up to 3 pages</li>
+        <li>Your info, services & contact form</li>
+        <li>Mobile-friendly design</li>
+        <li>Google-ready setup</li>
+        <li>1 round of edits</li>
+        <li>Delivered in ~1 week</li>
+      </ul>
+      <a href="#contact" class="pbtn pbtn-o">Get Started</a>
+    </div>
+    <div class="pcard hot">
+      <div class="hot-tag">Most Popular</div>
+      <p class="ptier">Standard</p>
+      <div class="pamnt"><sup>$</sup>499</div>
+      <p class="pdesc">For businesses that want a complete, polished site that covers everything customers look for.</p>
+      <ul class="pf">
+        <li>Up to 6 pages</li>
+        <li>Custom look built for your brand</li>
+        <li>Photo section & services menu</li>
+        <li>Contact form + click-to-call</li>
+        <li>2 rounds of edits</li>
+        <li>Delivered in ~1 week</li>
+      </ul>
+      <a href="#contact" class="pbtn pbtn-g">Get Started</a>
+    </div>
+    <div class="pcard">
+      <p class="ptier">Premium</p>
+      <div class="pamnt"><sup>$</sup>799</div>
+      <p class="pdesc">For businesses that want the full package — more pages, more polish, and ongoing support.</p>
+      <ul class="pf">
+        <li>Up to 10 pages</li>
+        <li>Everything in Standard</li>
+        <li>More detailed content sections</li>
+        <li>3 rounds of edits</li>
+        <li>1 month of free updates</li>
+        <li>Priority turnaround</li>
+      </ul>
+      <a href="#contact" class="pbtn pbtn-o">Get Started</a>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:36px;font-size:.84rem;color:var(--muted)">Need something different? <a href="#contact" style="color:var(--gold);text-decoration:none;font-weight:600">Just ask — we'll figure it out together.</a></p>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about" class="sec">
+  <div class="about-wrap">
+    <div class="reveal">
+      <span class="eyebrow">Who We Are</span>
+      <h2 class="h2">Two College Students<br>With a Simple Idea.</h2>
+      <div class="about-copy">
+        <p>We're Nathan Stezzi and Dylan Torres — two seniors at Loyola University Maryland. We're not computer scientists or engineers. We're just two people who figured out how to use AI tools to build really good websites for small businesses.</p>
+        <p>We started T.S. Pro because we saw a gap: local business owners needed websites but couldn't justify paying thousands to an agency, and the cheap template builders all looked the same.</p>
+        <p>AI changed the game. We can now build a professional, custom-looking website in a fraction of the time it used to take — and pass those savings on to you. You work with us directly, start to finish, no middleman.</p>
+      </div>
+      <a href="#contact" class="btn-gold" style="display:inline-block;margin-top:12px">Work With Us</a>
+    </div>
+    <div class="reveal">
+      <div class="founders">
+        <div class="founder"><div class="fav av-n">NS</div><div class="fname">Nathan Stezzi</div><div class="frole">Co-Founder</div></div>
+        <div class="founder"><div class="fav av-d">DT</div><div class="fname">Dylan Torres</div><div class="frole">Co-Founder</div></div>
+        <div class="loyola">🎓 Loyola University Maryland — Class of 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section id="faq" class="sec">
+  <div class="faq-wrap">
+    <div class="faq-pin reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="h2">Honest<br>Answers.</h2>
+      <p class="lead">No confusing tech talk. Just straight answers to what small business owners actually ask us.</p>
+      <a href="#contact">Still have questions? →</a>
+    </div>
+    <div class="reveal">
+      <div class="fq-item"><button class="fq-btn" onclick="tf(this)">Do I need to know anything about websites or technology? <span class="fq-ico">+</span></button><div class="fq-ans"><p>Not at all. You just tell us about your business in plain English and we take it from there. We handle everything technical — you just review the result and tell us what you like or want changed.</p></div></div>
+      <div class="fq-item"><button class="fq-btn" onclick="tf(this)">How long does it take to build my website? <span class="fq-ico">+</span></button><div class="fq-ans"><p>Most sites are ready for you to review within 5–7 days. Once you give us your feedback, any changes are usually done within 1–2 days. The whole process from start to live site is typically under 2 weeks.</p></div></div>
+      <div class="fq-item"><button class="fq-btn" onclick="tf(this)">What do I need to give you to get started? <span class="fq-ico">+</span></button><div class="fq-ans"><p>Just the basics — your business name, what you do, your phone number and location, and any photos you'd like to use. If you don't have photos, we can find good-looking ones that fit your business.</p></div></div>
+      <div class="fq-item"><button class="fq-btn" onclick="tf(this)">Will my website show up on Google? <span class="fq-ico">+</span></button><div class="fq-ans"><p>We set every site up so Google can find and understand it. That means your business name, address, and services are structured correctly. It takes a few weeks for Google to fully index a new site, but we make sure you're starting in the right place.</p></div></div>
+      <div class="fq-item"><button class="fq-btn" onclick="tf(this)">What if I want to make changes after the site is live? <span class="fq-ico">+</span></button><div class="fq-ans"><p>Just message us. Small updates like changing hours, adding a service, or swapping a photo are quick and easy. For bigger updates we can talk through options — we're always available.</p></div></div>
+      <div class="fq-item"><button class="fq-btn" onclick="tf(this)">Are there any monthly fees? <span class="fq-ico">+</span></button><div class="fq-ans"><p>The only recurring cost is your domain name — your web address like yourbusiness.com — which runs about $15 a year. Hosting is free through GitHub Pages, which we use for every site. No surprise bills.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact" class="sec">
+  <div class="contact-wrap">
+    <div class="reveal">
+      <span class="eyebrow">Get in Touch</span>
+      <h2 class="h2">Let's Get Your<br>Business Online.</h2>
+      <p class="contact-left p" style="font-size:.93rem;color:var(--muted);line-height:1.8;margin:18px 0 30px">Fill out the form and we'll get back to you within 24 hours. No commitment, no pressure — just a friendly conversation about what you need.</p>
+      <a href="mailto:tsprowebbuild@gmail.com" class="clink"><div class="cico">✉️</div><div class="ctxt"><strong>Email Us</strong>tsprowebbuild@gmail.com</div></a>
+      <div class="clink"><div class="cico">⏱️</div><div class="ctxt"><strong>Response Time</strong>Within 24 hours</div></div>
+      <div class="clink"><div class="cico">📍</div><div class="ctxt"><strong>Based In</strong>Baltimore, Maryland</div></div>
+    </div>
+    <div class="reveal">
+      <form class="cform" action="https://formspree.io/f/xwvarwgo" method="POST">
+        <div class="crow">
+          <div class="fg"><label>First Name</label><input type="text" name="first_name" placeholder="John" required/></div>
+          <div class="fg"><label>Last Name</label><input type="text" name="last_name" placeholder="Smith" required/></div>
+        </div>
+        <div class="fg"><label>Email Address</label><input type="email" name="email" placeholder="john@yourbusiness.com" required/></div>
+        <div class="fg"><label>Business Name</label><input type="text" name="business_name" placeholder="Smith's Plumbing"/></div>
+        <div class="fg"><label>Type of Business</label>
+          <select name="business_type">
+            <option value="">What kind of business do you have?</option>
+            <option>HVAC / Heating & Cooling</option>
+            <option>Plumbing</option>
+            <option>Electrical</option>
+            <option>Tire Shop / Auto Services</option>
+            <option>Restaurant / Food Service</option>
+            <option>Salon / Barbershop</option>
+            <option>Dental / Medical Office</option>
+            <option>Law Firm</option>
+            <option>Pet Care / Grooming</option>
+            <option>Gym / Fitness</option>
+            <option>Contractor / Construction</option>
+            <option>Retail / Shop</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fg"><label>Tell Us About Your Business</label><textarea name="message" placeholder="What does your business do? Do you already have a website? What are you hoping a website will help you with?"></textarea></div>
+        <button type="submit" class="csend">Send Message →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <a href="#hero" class="flogo">T.S. <em>Pro</em></a>
+  <ul class="flinks">
+    <li><a href="#what">Services</a></li>
+    <li><a href="#examples">Examples</a></li>
+    <li><a href="#how">Process</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <p class="fcopy">© 2025 T.S. Pro · Nathan Stezzi & Dylan Torres</p>
+</footer>
+
+<script>
+document.getElementById('burger').addEventListener('click',()=>document.getElementById('mob').classList.toggle('open'));
+function cm(){document.getElementById('mob').classList.remove('open')}
+function tf(b){b.closest('.fq-item').classList.toggle('open')}
+
+// Click-based dropdown logic
+document.querySelectorAll('.nl>li>button').forEach(btn=>{
+  btn.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    const li=btn.closest('li');
+    const isOpen=li.classList.contains('open');
+    // close all
+    document.querySelectorAll('.nl>li').forEach(x=>x.classList.remove('open'));
+    // toggle clicked
+    if(!isOpen) li.classList.add('open');
+  });
+});
+// close dropdown when clicking anywhere else
+document.addEventListener('click',()=>{
+  document.querySelectorAll('.nl>li').forEach(x=>x.classList.remove('open'));
+});
+// prevent dropdown itself from closing when clicked inside
+document.querySelectorAll('.dd').forEach(dd=>{
+  dd.addEventListener('click',(e)=>e.stopPropagation());
+});
+
+document.querySelectorAll('.cat').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.cat').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    const f=b.dataset.f;
+    document.querySelectorAll('#bizg .biz-card').forEach(c=>{
+      c.style.display=(f==='all'||c.dataset.c===f)?'':'none';
+    });
+  });
+});
+
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal,.stag').forEach(el=>obs.observe(el));
+
+
+</script>
+</body>
+</html>
